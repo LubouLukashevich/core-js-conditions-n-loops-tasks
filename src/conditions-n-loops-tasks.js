@@ -70,8 +70,46 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  let result = false;
+  let checkX = queen.x;
+  let checkY = queen.y;
+  if (queen.x === king.x || queen.y === king.y) result = true;
+  if (!result) {
+    while (checkX < 9 && checkY < 9) {
+      checkX += 1;
+      checkY += 1;
+      if (checkX === king.x && checkY === king.y) result = true;
+    }
+  }
+  if (!result) {
+    checkX = queen.x;
+    checkY = queen.y;
+    while (checkX > 0 && checkY > 0) {
+      checkX -= 1;
+      checkY -= 1;
+      if (checkX === king.x && checkY === king.y) result = true;
+    }
+  }
+  if (!result) {
+    checkX = queen.x;
+    checkY = queen.y;
+    while (checkX > 0 && checkY < 9) {
+      checkX -= 1;
+      checkY += 1;
+      if (checkX === king.x && checkY === king.y) result = true;
+    }
+  }
+  if (!result) {
+    checkX = queen.x;
+    checkY = queen.y;
+    while (checkX < 9 && checkY > 0) {
+      checkX += 1;
+      checkY -= 1;
+      if (checkX === king.x && checkY === king.y) result = true;
+    }
+  }
+  return result;
 }
 
 /**
@@ -92,8 +130,12 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  let result = false;
+  if (a + b > c && a + c > b && b + c > a && (a === b || b === c || a === c)) {
+    result = true;
+  }
+  return result;
 }
 
 /**
@@ -110,8 +152,28 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let result = '';
+  let i = 10;
+  const baze = [
+    '',
+    'I',
+    'II',
+    'III',
+    'IV',
+    'V',
+    'VI',
+    'VII',
+    'VIII',
+    'IX',
+    'X',
+  ];
+  while (num - i >= 0) {
+    result += baze[10];
+    i += 10;
+  }
+  result += baze[num % 10];
+  return result;
 }
 
 /**
@@ -261,8 +323,22 @@ function isContainNumber(num, digit) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  let result = -1;
+  let sumBefore = 0;
+  let sumAfter = 0;
+  for (let i = 1; i < arr.length - 1; i += 1) {
+    for (let j = 0; j < i; j += 1) {
+      sumBefore += arr[j];
+    }
+    for (let j = arr.length - 1; j > i; j -= 1) {
+      sumAfter += arr[j];
+    }
+    if (sumBefore === sumAfter) result = i;
+    sumBefore = 0;
+    sumAfter = 0;
+  }
+  return result;
 }
 
 /**
@@ -323,8 +399,19 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const result = arr;
+  let c = 0;
+  for (let i = 0; i < result.length - 1; i += 1) {
+    for (let j = i + 1; j < result.length; j += 1) {
+      if (result[i] > result[j]) {
+        c = result[i];
+        result[i] = result[j];
+        result[j] = c;
+      }
+    }
+  }
+  return result;
 }
 
 /**
@@ -344,7 +431,7 @@ function sortByAsc(/* arr */) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
+function shuffleChar(/* str, iterations  */) {
   throw new Error('Not implemented');
 }
 
